@@ -1,0 +1,10 @@
+.vs
+.vscode
+
+build
+out
+
+*.bin
+*.pdb
+
+CMakeSettings.json
