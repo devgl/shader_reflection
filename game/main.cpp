@@ -7,6 +7,8 @@ using namespace Microsoft::WRL;
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <d3d12.h>
+#include "d3dx12.h"
 
 #define ThrowIfFailed(h) if (FAILED(h)) throw std::exception("failed");
 
@@ -15,10 +17,10 @@ int main()
 	std::vector<LPCWSTR> arguments;
 
 	arguments.push_back(L"-E");
-	arguments.push_back(L"main");
+	arguments.push_back(L"VSMain");
 
 	arguments.push_back(L"-T");
-	arguments.push_back(L"ps_6_0");
+	arguments.push_back(L"vs_6_0");
 
 	arguments.push_back(L"-Zi");
 	arguments.push_back(L"-Fd");
@@ -31,7 +33,7 @@ int main()
 	arguments.push_back(L"-D");
 	arguments.push_back(L"MY_DEFINE=1");
 
-	std::ifstream shaderFile(ShaderPath, std::ios::ate|std::ios::binary);
+	std::ifstream shaderFile(ShaderPath, std::ios::ate | std::ios::binary);
 	size_t fileSize = shaderFile.tellg();
 	char* shaderContent = new char[fileSize];
 	shaderFile.seekg(0, shaderFile.beg);
@@ -92,6 +94,26 @@ int main()
 
 	ComPtr<ID3D12ShaderReflection> D3D12Reflection;
 	ThrowIfFailed(utils->CreateReflection(&reflectionData, IID_PPV_ARGS(&D3D12Reflection)));
+
+	D3D12_SHADER_DESC desc{};
+	D3D12Reflection->GetDesc(&desc);
+
+	ComPtr<IDxcBlob> rootSig;
+	ThrowIfFailed(result->GetOutput(DXC_OUT_ROOT_SIGNATURE, IID_PPV_ARGS(&rootSig), nullptr));
+
+	std::vector<D3D12_SIGNATURE_PARAMETER_DESC> sigDescs(desc.InputParameters);
+	for (uint32_t i = 0; i < desc.InputParameters; i++)
+	{
+		D3D12Reflection->GetInputParameterDesc(i, &sigDescs[i]);
+	}
+
+	std::vector<D3D12_SIGNATURE_PARAMETER_DESC> outputDescs(desc.OutputParameters);
+	for (uint32_t i = 0; i < desc.OutputParameters; i++)
+	{
+		D3D12Reflection->GetOutputParameterDesc(i, &outputDescs[i]);
+	}
+
+
 
 	return 0;
 }
