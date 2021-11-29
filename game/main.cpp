@@ -9,8 +9,10 @@ using namespace Microsoft::WRL;
 #include <fstream>
 #include <d3d12.h>
 #include "d3dx12.h"
+#include <spdlog/spdlog.h>
 
 #define ThrowIfFailed(h) if (FAILED(h)) throw std::exception("failed");
+
 
 int TestDXCReflect()
 {
@@ -65,7 +67,14 @@ void TestSpirvReflect()
 
 	spv_reflect::ShaderModule shaderModule(fileSize, shaderContent);
 	
-
+	uint32_t count = 0;
+	shaderModule.EnumerateDescriptorSets(&count, nullptr);
+	std::vector<SpvReflectDescriptorSet*> descSets(count);
+	shaderModule.EnumerateDescriptorSets(&count, descSets.data());
+	for (auto s : descSets)
+	{
+		SPDLOG_INFO("set : {0}, binding : {1}", s->set, s->binding_count);
+	}
 }
 
 int main()

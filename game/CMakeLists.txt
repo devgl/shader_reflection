@@ -1,6 +1,6 @@
 add_executable(Game "main.cpp" "pch.hpp")
 target_precompile_headers(Game PRIVATE "pch.hpp")
-target_link_libraries(Game PUBLIC DXC SPIRV_REFLECT)
+target_link_libraries(Game PUBLIC DXC SPIRV_REFLECT SPDLOG )
 
 
 target_compile_definitions(Game 
