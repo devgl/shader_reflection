@@ -12,7 +12,7 @@ using namespace Microsoft::WRL;
 
 #define ThrowIfFailed(h) if (FAILED(h)) throw std::exception("failed");
 
-void TestDXCReflect()
+int TestDXCReflect()
 {
 	std::vector<LPCWSTR> arguments;
 
@@ -33,7 +33,7 @@ void TestDXCReflect()
 	arguments.push_back(L"-D");
 	arguments.push_back(L"MY_DEFINE=1");
 
-	std::ifstream shaderFile(ShaderPath, std::ios::ate | std::ios::binary);
+	std::ifstream shaderFile(ShaderFilePath, std::ios::ate | std::ios::binary);
 	size_t fileSize = shaderFile.tellg();
 	char* shaderContent = new char[fileSize];
 	shaderFile.seekg(0, shaderFile.beg);
@@ -112,13 +112,17 @@ void TestDXCReflect()
 	{
 		D3D12Reflection->GetOutputParameterDesc(i, &outputDescs[i]);
 	}
+
+	return 0;
 }
 
 #include <spirv_reflect.h>
 
 void TestSpirvReflect()
 {
-	std::ifstream shaderFile(ShaderPath, std::ios::ate | std::ios::binary);
+	constexpr char* pvs = ASSEMBLY_PATH("shader.spirv.ps.bin");
+
+	std::ifstream shaderFile(pvs, std::ios::ate | std::ios::binary);
 	size_t fileSize = shaderFile.tellg();
 	char* shaderContent = new char[fileSize];
 	shaderFile.seekg(0, shaderFile.beg);
@@ -126,12 +130,13 @@ void TestSpirvReflect()
 	shaderFile.close();
 
 	spv_reflect::ShaderModule shaderModule(fileSize, shaderContent);
+	
 
 }
 
 int main()
 {
-	TestDXCReflect();
+	//TestDXCReflect();
 	TestSpirvReflect();
 	return 0;
 }

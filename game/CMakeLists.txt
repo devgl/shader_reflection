@@ -5,6 +5,9 @@ target_link_libraries(Game PUBLIC DXC SPIRV_REFLECT)
 
 target_compile_definitions(Game 
 	PRIVATE 
-		ShaderPath="${CMAKE_CURRENT_LIST_DIR}/shaders/shader.hlsl"
+		ShaderPath="${CMAKE_CURRENT_LIST_DIR}/shaders/"
+		ShaderFilePath="${CMAKE_CURRENT_LIST_DIR}/shaders/shader.hlsl"
 		ShaderBinary="${CMAKE_CURRENT_LIST_DIR}/shaders/shader.bin"
-		PDBFilePath="${CMAKE_CURRENT_LIST_DIR}/shaders/shader.pdb")
+		PDBFilePath="${CMAKE_CURRENT_LIST_DIR}/shaders/shader.pdb"
+		
+)
