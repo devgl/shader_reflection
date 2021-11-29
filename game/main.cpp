@@ -12,7 +12,7 @@ using namespace Microsoft::WRL;
 
 #define ThrowIfFailed(h) if (FAILED(h)) throw std::exception("failed");
 
-int main()
+void TestDXCReflect()
 {
 	std::vector<LPCWSTR> arguments;
 
@@ -112,8 +112,26 @@ int main()
 	{
 		D3D12Reflection->GetOutputParameterDesc(i, &outputDescs[i]);
 	}
+}
 
+#include <spirv_reflect.h>
 
+void TestSpirvReflect()
+{
+	std::ifstream shaderFile(ShaderPath, std::ios::ate | std::ios::binary);
+	size_t fileSize = shaderFile.tellg();
+	char* shaderContent = new char[fileSize];
+	shaderFile.seekg(0, shaderFile.beg);
+	shaderFile.read(shaderContent, fileSize);
+	shaderFile.close();
 
+	spv_reflect::ShaderModule shaderModule(fileSize, shaderContent);
+
+}
+
+int main()
+{
+	TestDXCReflect();
+	TestSpirvReflect();
 	return 0;
 }

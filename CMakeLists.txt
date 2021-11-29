@@ -4,3 +4,4 @@ project(shader_reflection)
 
 add_subdirectory(dxc)
 add_subdirectory(game)
+add_subdirectory(spirv_reflect)
