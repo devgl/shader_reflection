@@ -7,6 +7,7 @@
 ; COLOR                    0   xyzw        1     NONE   float   xyzw
 ; NORMAL                   0   xyzw        2     NONE   float   xyzw
 ; TEXCOORD                 0   xyzw        3     NONE   float   xyzw
+; TEXCOORD                 1   xyzw        4     NONE   float       
 ;
 ;
 ; Output signature:
@@ -18,7 +19,7 @@
 ; TEXCOORD                 1   xyzw        2     NONE   float   xyzw
 ; TEXCOORD                 2   xyzw        3     NONE   float   xyzw
 ;
-; shader hash: 6583d72307f6341b7ff7d78730e99685
+; shader hash: 03c6bbfc5f17c1bd5eafed176f68331a
 ;
 ; Pipeline Runtime Information: 
 ;
@@ -34,6 +35,7 @@
 ; COLOR                    0                              
 ; NORMAL                   0                              
 ; TEXCOORD                 0                              
+; TEXCOORD                 1                              
 ;
 ; Output signature:
 ;
@@ -55,7 +57,7 @@
 ;
 ; ViewId state:
 ;
-; Number of inputs: 16, outputs: 16
+; Number of inputs: 20, outputs: 16
 ; Outputs dependent on ViewId: {  }
 ; Inputs contributing to computation of Outputs:
 ;   output 0 depends on inputs: { 0 }
@@ -134,20 +136,21 @@ attributes #1 = { nounwind }
 !1 = !{i32 1, i32 0}
 !2 = !{i32 1, i32 5}
 !3 = !{!"vs", i32 6, i32 0}
-!4 = !{[18 x i32] [i32 16, i32 16, i32 1, i32 2, i32 4, i32 8, i32 16, i32 32, i32 64, i32 128, i32 4096, i32 8192, i32 16384, i32 32768, i32 256, i32 512, i32 1024, i32 2048]}
+!4 = !{[22 x i32] [i32 20, i32 16, i32 1, i32 2, i32 4, i32 8, i32 16, i32 32, i32 64, i32 128, i32 4096, i32 8192, i32 16384, i32 32768, i32 256, i32 512, i32 1024, i32 2048, i32 0, i32 0, i32 0, i32 0]}
 !5 = !{void ()* @VSMain, !"VSMain", !6, null, null}
-!6 = !{!7, !14, null}
-!7 = !{!8, !11, !12, !13}
+!6 = !{!7, !16, null}
+!7 = !{!8, !11, !12, !13, !14}
 !8 = !{i32 0, !"POSITION", i8 9, i8 0, !9, i8 0, i32 1, i8 4, i32 0, i8 0, !10}
 !9 = !{i32 0}
 !10 = !{i32 3, i32 15}
 !11 = !{i32 1, !"COLOR", i8 9, i8 0, !9, i8 0, i32 1, i8 4, i32 1, i8 0, !10}
 !12 = !{i32 2, !"NORMAL", i8 9, i8 0, !9, i8 0, i32 1, i8 4, i32 2, i8 0, !10}
 !13 = !{i32 3, !"TEXCOORD", i8 9, i8 0, !9, i8 0, i32 1, i8 4, i32 3, i8 0, !10}
-!14 = !{!15, !16, !17, !19}
-!15 = !{i32 0, !"SV_Position", i8 9, i8 3, !9, i8 4, i32 1, i8 4, i32 0, i8 0, !10}
-!16 = !{i32 1, !"TEXCOORD", i8 9, i8 0, !9, i8 2, i32 1, i8 4, i32 1, i8 0, !10}
-!17 = !{i32 2, !"TEXCOORD", i8 9, i8 0, !18, i8 2, i32 1, i8 4, i32 2, i8 0, !10}
-!18 = !{i32 1}
-!19 = !{i32 3, !"TEXCOORD", i8 9, i8 0, !20, i8 2, i32 1, i8 4, i32 3, i8 0, !10}
-!20 = !{i32 2}
+!14 = !{i32 4, !"TEXCOORD", i8 9, i8 0, !15, i8 0, i32 1, i8 4, i32 4, i8 0, null}
+!15 = !{i32 1}
+!16 = !{!17, !18, !19, !20}
+!17 = !{i32 0, !"SV_Position", i8 9, i8 3, !9, i8 4, i32 1, i8 4, i32 0, i8 0, !10}
+!18 = !{i32 1, !"TEXCOORD", i8 9, i8 0, !9, i8 2, i32 1, i8 4, i32 1, i8 0, !10}
+!19 = !{i32 2, !"TEXCOORD", i8 9, i8 0, !15, i8 2, i32 1, i8 4, i32 2, i8 0, !10}
+!20 = !{i32 3, !"TEXCOORD", i8 9, i8 0, !21, i8 2, i32 1, i8 4, i32 3, i8 0, !10}
+!21 = !{i32 2}

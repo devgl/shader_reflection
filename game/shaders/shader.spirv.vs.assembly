@@ -1,18 +1,19 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google spiregg; 0
-; Bound: 21
+; Bound: 22
 ; Schema: 0
                OpCapability Shader
                OpExtension "SPV_GOOGLE_hlsl_functionality1"
                OpExtension "SPV_GOOGLE_user_type"
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Vertex %VSMain "VSMain" %in_var_POSITION %in_var_COLOR %in_var_NORMAL %in_var_TEXCOORD0 %gl_Position %out_var_TEXCOORD0 %out_var_TEXCOORD1 %out_var_TEXCOORD2
+               OpEntryPoint Vertex %VSMain "VSMain" %in_var_POSITION %in_var_COLOR %in_var_NORMAL %in_var_TEXCOORD0 %in_var_TEXCOORD1 %gl_Position %out_var_TEXCOORD0 %out_var_TEXCOORD1 %out_var_TEXCOORD2
                OpSource HLSL 600
                OpName %in_var_POSITION "in.var.POSITION"
                OpName %in_var_COLOR "in.var.COLOR"
                OpName %in_var_NORMAL "in.var.NORMAL"
                OpName %in_var_TEXCOORD0 "in.var.TEXCOORD0"
+               OpName %in_var_TEXCOORD1 "in.var.TEXCOORD1"
                OpName %out_var_TEXCOORD0 "out.var.TEXCOORD0"
                OpName %out_var_TEXCOORD1 "out.var.TEXCOORD1"
                OpName %out_var_TEXCOORD2 "out.var.TEXCOORD2"
@@ -21,6 +22,7 @@
                OpDecorateString %in_var_COLOR UserSemantic "COLOR"
                OpDecorateString %in_var_NORMAL UserSemantic "NORMAL"
                OpDecorateString %in_var_TEXCOORD0 UserSemantic "TEXCOORD0"
+               OpDecorateString %in_var_TEXCOORD1 UserSemantic "TEXCOORD1"
                OpDecorate %gl_Position BuiltIn Position
                OpDecorateString %gl_Position UserSemantic "SV_Position"
                OpDecorateString %out_var_TEXCOORD0 UserSemantic "TEXCOORD0"
@@ -30,6 +32,7 @@
                OpDecorate %in_var_COLOR Location 1
                OpDecorate %in_var_NORMAL Location 2
                OpDecorate %in_var_TEXCOORD0 Location 3
+               OpDecorate %in_var_TEXCOORD1 Location 4
                OpDecorate %out_var_TEXCOORD0 Location 0
                OpDecorate %out_var_TEXCOORD1 Location 1
                OpDecorate %out_var_TEXCOORD2 Location 2
@@ -38,24 +41,25 @@
 %_ptr_Input_v4float = OpTypePointer Input %v4float
 %_ptr_Output_v4float = OpTypePointer Output %v4float
        %void = OpTypeVoid
-         %15 = OpTypeFunction %void
+         %16 = OpTypeFunction %void
 %in_var_POSITION = OpVariable %_ptr_Input_v4float Input
 %in_var_COLOR = OpVariable %_ptr_Input_v4float Input
 %in_var_NORMAL = OpVariable %_ptr_Input_v4float Input
 %in_var_TEXCOORD0 = OpVariable %_ptr_Input_v4float Input
+%in_var_TEXCOORD1 = OpVariable %_ptr_Input_v4float Input
 %gl_Position = OpVariable %_ptr_Output_v4float Output
 %out_var_TEXCOORD0 = OpVariable %_ptr_Output_v4float Output
 %out_var_TEXCOORD1 = OpVariable %_ptr_Output_v4float Output
 %out_var_TEXCOORD2 = OpVariable %_ptr_Output_v4float Output
-     %VSMain = OpFunction %void None %15
-         %16 = OpLabel
-         %17 = OpLoad %v4float %in_var_POSITION
-         %18 = OpLoad %v4float %in_var_COLOR
-         %19 = OpLoad %v4float %in_var_NORMAL
-         %20 = OpLoad %v4float %in_var_TEXCOORD0
-               OpStore %gl_Position %17
-               OpStore %out_var_TEXCOORD0 %18
-               OpStore %out_var_TEXCOORD1 %20
-               OpStore %out_var_TEXCOORD2 %19
+     %VSMain = OpFunction %void None %16
+         %17 = OpLabel
+         %18 = OpLoad %v4float %in_var_POSITION
+         %19 = OpLoad %v4float %in_var_COLOR
+         %20 = OpLoad %v4float %in_var_NORMAL
+         %21 = OpLoad %v4float %in_var_TEXCOORD0
+               OpStore %gl_Position %18
+               OpStore %out_var_TEXCOORD0 %19
+               OpStore %out_var_TEXCOORD1 %21
+               OpStore %out_var_TEXCOORD2 %20
                OpReturn
                OpFunctionEnd

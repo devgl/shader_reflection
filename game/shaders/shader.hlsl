@@ -8,7 +8,8 @@ struct VSInput
     float4 position : POSITION;
     float4 color : COLOR;
     float4 normal : NORMAL;
-    float4 uv : TEXCOORD0;
+    float4 uv0 : TEXCOORD0;
+    float4 uv1 : TEXCOORD1;
 };
 
 struct PSInput
@@ -25,7 +26,7 @@ PSInput VSMain(VSInput input)
     PSInput output;
     output.position = input.position;
     output.color = input.color;
-    output.uv = input.uv;
+    output.uv = input.uv0;
     output.normal = input.normal;
     return output;
 }

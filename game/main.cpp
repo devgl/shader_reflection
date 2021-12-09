@@ -16,7 +16,7 @@ using namespace Microsoft::WRL;
 
 int TestDXCReflect()
 {
-	std::ifstream shaderFile(ASSEMBLY_PATH("shader.dxc.vs.bin"), std::ios::ate | std::ios::binary);
+	std::ifstream shaderFile(ASSEMBLY_PATH("shader.dxc.ps.bin"), std::ios::ate | std::ios::binary);
 	size_t fileSize = shaderFile.tellg();
 	char* shaderContent = new char[fileSize];
 	shaderFile.seekg(0, shaderFile.beg);
@@ -43,10 +43,23 @@ int TestDXCReflect()
 		D3D12Reflection->GetInputParameterDesc(i, &sigDescs[i]);
 	}
 
-	std::vector<D3D12_SIGNATURE_PARAMETER_DESC> outputDescs(desc.OutputParameters);
-	for (uint32_t i = 0; i < desc.OutputParameters; i++)
+	for (uint32_t i = 0; i < desc.ConstantBuffers; i++)
 	{
-		D3D12Reflection->GetOutputParameterDesc(i, &outputDescs[i]);
+		auto cb = D3D12Reflection->GetConstantBufferByIndex(i);
+
+		D3D12_SHADER_BUFFER_DESC desc{};
+		cb->GetDesc(&desc);
+		auto v0 = cb->GetVariableByIndex(0);
+	}
+
+	for (uint32_t i = 0; i < desc.BoundResources; i++)
+	{
+		D3D12_SHADER_INPUT_BIND_DESC d{};
+		D3D12Reflection->GetResourceBindingDesc(i, &d);
+		if (d.Type == D3D_SIT_TEXTURE)
+		{
+			SPDLOG_INFO("Bind, {0}, {1}, {2}, {3}", d.BindCount, d.BindPoint, d.Space, d.uID);
+		}
 	}
 
 	return 0;
