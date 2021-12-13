@@ -1,7 +1,9 @@
 add_executable(Game "main.cpp" "pch.hpp")
 target_precompile_headers(Game PRIVATE "pch.hpp")
-target_link_libraries(Game PUBLIC DXC SPIRV_REFLECT SPDLOG )
-
+target_link_libraries(Game PUBLIC SPDLOG LibShaderCompiler )
+target_compile_definitions(Game PUBLIC _UNICODE UNICODE)
+target_compile_features(Game PUBLIC cxx_std_20)
+target_compile_options(Game PRIVATE /Zc:preprocessor)
 add_library(Shaders INTERFACE "shaders/root_sig.hlsl" "Shaders/shader.hlsl")
 
 target_compile_definitions(Game 

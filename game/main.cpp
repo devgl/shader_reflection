@@ -1,3 +1,5 @@
+/*
+
 #include <d3d12shader.h>
 #include <dxcapi.h>
 #include <vector>
@@ -89,10 +91,17 @@ void TestSpirvReflect()
 		SPDLOG_INFO("set : {0}, binding : {1}", s->set, s->binding_count);
 	}
 }
+*/
+
+#include <Compiler.hpp>
+#include <string>
 
 int main()
 {
-	TestDXCReflect();
-	TestSpirvReflect();
+	std::wstring pdb(Widen(ASSEMBLY_PATH("out/shader.pdb")));
+	std::wstring bin(Widen(ASSEMBLY_PATH("out/shader.bin")));
+	std::wstring ref(Widen(ASSEMBLY_PATH("out/shader.ref")));
+
+	Compiler::Compile(ShaderFilePath, pdb.c_str(), bin.c_str(), ref.c_str());
 	return 0;
 }
