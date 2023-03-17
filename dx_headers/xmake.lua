@@ -1,4 +1,6 @@
 target("dx_headers")
+    -- version 1.608.2
+
     set_kind("static")
     add_files("src/*.cpp")
     add_headerfiles("include/**.h")
