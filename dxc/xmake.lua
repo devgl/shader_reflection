@@ -1,5 +1,6 @@
 target("dxc")
     set_kind("headeronly")
+    add_headerfiles("inc/*.h")
     add_includedirs("inc", {public=true})
     add_linkdirs("lib/$(arch)/", {public=true})
 target_end()

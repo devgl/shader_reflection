@@ -6,7 +6,7 @@
 
 namespace shader_reflection
 {
-    struct SHADER_REFLECTION_API options
+    struct SHADER_REFLECTION_API compile_option
     {
         std::wstring_view file_path;
     };
@@ -17,7 +17,7 @@ namespace shader_reflection
 
     SHADER_REFLECTION_API
     [[nodiscard]]
-    result reflect(const options* options);
+    result reflect(const compile_option* option);
 }
 
 

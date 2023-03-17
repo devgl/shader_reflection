@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release")
 
-set_project("dx12pg")
+set_project("shader reflection")
 set_languages("c++20")
 
 includes("dx_headers")
