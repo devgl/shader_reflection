@@ -1,0 +1,8 @@
+target("lib_shader_reflection")
+    set_kind("static")
+    add_files("src/*.cpp")
+    add_includedirs("include", {public=true})
+    add_headerfiles("include/**.hpp")
+    add_defines("SHADER_REFLECTION_IMPL")
+    add_deps("dx_headers", {public=true})
+target_end()

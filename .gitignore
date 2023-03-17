@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# the generated vs project files
+.vscode
+.xmake
+build
+vsxmake*
